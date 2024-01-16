@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "name": "Alan Nofrialdi",
+      "email": "alannofrialdi098@gmail.com",
+      "phone": "082124995966",
+      "age": 19,
+      "id": "dc05"
+    },
+    {
+      "name": "Jokowi Dodo",
+      "email": "jokowi@gmail.com",
+      "phone": "0813149999661",
+      "age": 44,
+      "id": "bbbe"
+    },
+    {
+      "name": "Budi doremi",
+      "email": "Doremi@gmail.com",
+      "phone": "088144995957",
+      "age": 23,
+      "id": "3257",
+      "prevName": "Budi Doremi"
+    },
+    {
+      "name": "Zhe Olivia",
+      "email": "Zhe@gmail.com",
+      "phone": "082776995966",
+      "age": 17,
+      "id": "8d8d"
+    }
+  ]
+}

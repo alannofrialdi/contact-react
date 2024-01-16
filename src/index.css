@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  color: #0f172a;
+}
+#card {
+  color: #0f172a;
+}
