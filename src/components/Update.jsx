@@ -123,51 +123,59 @@ function Update() {
         <div className="text-3xl font-semibold text-center text-gray-800 mb-6">
           <Heading head="Update Contact" />
         </div>
-        <form className="space-y-4" onSubmit={handleUpdate}>
-          <input
-            type="hidden"
-            name="prevName"
-            id="prevName"
-            value={data.prevName || data.name}
-            onChange={handleChange}
-          />
-          {["name", "email", "phone", "age"].map((field) => (
-            <div key={field}>
-              <label
-                htmlFor={field}
-                className="block text-gray-600 text-sm font-medium mb-2"
-              >
-                {field.charAt(0).toUpperCase() + field.slice(1)}
-              </label>
-              <input
-                type={
-                  field === "email"
-                    ? "email"
-                    : field === "phone"
-                    ? "tel"
-                    : "text"
-                }
-                id={field}
-                name={field}
-                value={data[field] || ""} // Ensure value is not undefined
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 text-sm"
-                required
-              />
-            </div>
-          ))}
-          <div className="mb-6">
-            <button
-              type="submit"
-              className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none"
-            >
-              Update Contact
-            </button>
-          </div>
-        </form>
+        <Form
+          data={data}
+          handleChange={handleChange}
+          handleUpdate={handleUpdate}
+        />
       </div>
     </div>
   );
 }
+
+function Form({ data, handleChange, handleUpdate }) {
+  return (
+    <form className="space-y-4" onSubmit={handleUpdate}>
+      <input
+        type="hidden"
+        name="prevName"
+        id="prevName"
+        value={data.prevName || data.name}
+        onChange={handleChange}
+      />
+      {["name", "email", "phone", "age"].map((field) => (
+        <div key={field}>
+          <label
+            htmlFor={field}
+            className="block text-gray-600 text-sm font-medium mb-2"
+          >
+            {field.charAt(0).toUpperCase() + field.slice(1)}
+          </label>
+          <input
+            type={
+              field === "email" ? "email" : field === "phone" ? "tel" : "text"
+            }
+            id={field}
+            name={field}
+            value={data[field] || ""} // Ensure value is not undefined
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 text-sm"
+            required
+          />
+        </div>
+      ))}
+      <div className="mb-6">
+        <button
+          type="submit"
+          className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none"
+        >
+          Update Contact
+        </button>
+      </div>
+    </form>
+  );
+}
+
+Form.propTypes;
 
 export default Update;
