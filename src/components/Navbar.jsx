@@ -18,7 +18,7 @@ function Navbar() {
 
   return (
     <div
-      className={`bg-blue-500 p-4 rounded shadow-slate-400 ${
+      className={`p-4 rounded shadow-slate-400 bg-gradient-to-r from-indigo-700 to-blue-500 ${
         theme === "dark" ? "dark:shadow-none" : "shadow-lg"
       }`}
     >

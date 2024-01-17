@@ -13,7 +13,7 @@ function Read() {
         const response = await axios.get(
           `http://localhost:3000/users?name=${name}`
         );
-        setData(response.data[0]); // Assuming the API returns an array, and you want the first result
+        setData(response.data[0]); // first result [0]
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -23,19 +23,32 @@ function Read() {
   }, [name]);
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md mt-10 sm:mt-20 md:mt-40">
-      <div className="p-6">
-        {data ? <UserInfo data={data} /> : <EmptyMessage />}
-        <span className="block sm:inline-block mt-4">
-          <Link
-            to={"/"}
-            className="font-light text-blue-700 hover:text-blue-400"
-          >
-            &lArr; back to contact
-          </Link>
-        </span>
+    <>
+      <div className="mt-40 w-72 h-80 mx-auto bg-gray-100 rounded-xl shadow-2xl">
+        <div className="flex items-center p-3">
+          <div className="px-1">
+            <span className="w-4 h-4 rounded-full inline-block bg-red-500 cursor-pointer"></span>
+          </div>
+          <div className="px-1">
+            <span className="w-4 h-4 rounded-full inline-block bg-yellow-400 cursor-pointer"></span>
+          </div>
+          <div className="px-1">
+            <span className="w-4 h-4 rounded-full inline-block bg-green-500 cursor-pointer"></span>
+          </div>
+        </div>
+        <div className="pl-4 mt-2">
+          {data ? <UserInfo data={data} /> : <EmptyMessage />}
+          <span className="block sm:inline-block">
+            <Link
+              to={"/"}
+              className="font-light text-blue-700 hover:text-blue-900"
+            >
+              &lArr; back to contact
+            </Link>
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

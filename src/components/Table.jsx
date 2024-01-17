@@ -60,12 +60,12 @@ export default function Table() {
 
 function Search({ setSearch }) {
   return (
-    <div className="max-w-md mx-auto ">
-      <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+    <div className="max-w-md mx-auto mb-2">
+      <div className="relative flex items-center w-full h-12 rounded-2xl focus-within:shadow-lg bg-white overflow-hidden">
         <div className="grid place-items-center h-full w-12 text-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-6 w-6 text-gray-500 "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -79,8 +79,8 @@ function Search({ setSearch }) {
           </svg>
         </div>
         <input
-          onChange={(e) => setSearch(e.target.value.toLowerCase())}
-          className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+          onChange={(e) => setSearch(e.target.value.toLowerCase().trim())}
+          className="peer h-full w-full outline-none text-sm text-gray-900 pr-2 animate-pulse"
           type="text"
           id="search"
           placeholder="Search Contact.."
@@ -92,7 +92,7 @@ function Search({ setSearch }) {
 
 function TableHead() {
   return (
-    <thead className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white">
+    <thead className="bg-gradient-to-r from-indigo-700 to-blue-500 text-white">
       <tr>
         {/* mapping table head */}
         {TABLE_HEAD.map((head) => (
