@@ -164,15 +164,21 @@ function Form({ data, handleChange, handleUpdate }) {
           />
         </div>
       ))}
-      <div className="mb-6">
-        <button
-          type="submit"
-          className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none"
-        >
-          Update Contact
-        </button>
-      </div>
+      <UpdateButton />
     </form>
+  );
+}
+
+function UpdateButton() {
+  return (
+    <div className="mb-6">
+      <button
+        type="submit"
+        className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none"
+      >
+        Update Contact
+      </button>
+    </div>
   );
 }
 

@@ -74,17 +74,20 @@ const ContactForm = () => {
       return;
     }
 
-    // post data to the server
-    axios
-      .post("http://localhost:3000/users", data)
-      .then((res) => {
-        console.log(res);
+    const postData = async () => {
+      try {
+        const response = await axios.post("http://localhost:3000/users", data);
+        console.log(response);
         toast.success(`Successfully added ${data.name}`);
         navigate("/");
-      })
-      .catch((err) => console.log(err));
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     console.log("Form submitted:", data);
+
+    postData();
   };
 
   return (
