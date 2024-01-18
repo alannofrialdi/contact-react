@@ -1,6 +1,6 @@
 import { Card, Typography } from "@material-tailwind/react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import "../index.css";
 import { Link } from "react-router-dom";
@@ -8,19 +8,11 @@ import { toast } from "react-toastify";
 
 const TABLE_HEAD = ["Name", "Email", "Phone", "Age", "Action", "Detail"];
 
-export default function Table() {
-  const [data, setData] = useState([]);
-
+export default function Table({ data, setData }) {
   // search data
   const [search, setSearch] = useState("");
 
   // fetch data
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/users")
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete?");
@@ -166,6 +158,7 @@ const Caption = () => {
   );
 };
 
+Table.propTypes;
 TableContainer.propTypes;
 TableBody.propTypes;
 Search.propTypes;

@@ -25,7 +25,7 @@
     {
       "name": "Zhe Olivia",
       "email": "Zhe@gmail.com",
-      "phone": "082776995966",
+      "phone": "08123123123123",
       "age": 17,
       "id": "8d8d"
     },
@@ -35,13 +35,6 @@
       "email": "pb@gmail.com",
       "phone": "0812312839993",
       "age": "54"
-    },
-    {
-      "id": "8379",
-      "name": "Christiano Loye",
-      "email": "loye@gmail.com",
-      "phone": "0821392392299",
-      "age": "24"
     }
   ]
 }

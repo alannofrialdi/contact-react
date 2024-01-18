@@ -34,18 +34,22 @@ export default function Home() {
       ) : (
         <>
           <Navbar />
-          <Body data={data} />
+          <Body data={data} setData={setData} />
         </>
       )}
     </>
   );
 }
 
-const Body = ({ data }) => {
+const Body = ({ data, setData }) => {
   return (
     <div className="mt-8 flex flex-col justify-center min-h-full min-w-full items-center gap-8">
       <AddContact />
-      {data.length === 0 ? <EmptyMessage /> : <Table />}
+      {data.length === 0 ? (
+        <EmptyMessage />
+      ) : (
+        <Table data={data} setData={setData} />
+      )}
     </div>
   );
 };
@@ -92,4 +96,5 @@ const Loader = () => {
 
 Body.propTypes = {
   data: PropTypes.array.isRequired,
+  setData: PropTypes.func.isRequired,
 };
