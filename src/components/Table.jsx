@@ -1,6 +1,5 @@
 import { Card, Typography } from "@material-tailwind/react";
 import axios from "axios";
-import { useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import "../index.css";
 import { Link } from "react-router-dom";
@@ -8,10 +7,7 @@ import { toast } from "react-toastify";
 
 const TABLE_HEAD = ["Name", "Email", "Phone", "Age", "Action", "Detail"];
 
-export default function Table({ data, setData }) {
-  // search data
-  const [search, setSearch] = useState("");
-
+export default function Table({ data, setData, search }) {
   // fetch data
 
   const handleDelete = async (id) => {
@@ -43,7 +39,6 @@ export default function Table({ data, setData }) {
           <Caption />
         </TableContainer>
       </Card>
-      <Search setSearch={setSearch} />
     </>
   );
 }
@@ -53,38 +48,6 @@ const TableContainer = ({ children }) => {
     <table className="w-full min-w-max table-auto text-center border-collapse bg-white bg-opacity-70">
       {children}
     </table>
-  );
-};
-
-const Search = ({ setSearch }) => {
-  return (
-    <div className="max-w-md mx-auto mb-2">
-      <div className="relative flex items-center w-full h-12 rounded-2xl focus-within:shadow-lg bg-white overflow-hidden">
-        <div className="grid place-items-center h-full w-12 text-gray-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-gray-500 "
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </div>
-        <input
-          onChange={(e) => setSearch(e.target.value.toLowerCase().trim())}
-          className="peer h-full w-full outline-none text-sm text-gray-900 pr-2 animate-pulse"
-          type="text"
-          id="search"
-          placeholder="Search Contact.."
-        />
-      </div>
-    </div>
   );
 };
 
@@ -152,7 +115,7 @@ const TableBody = ({ data, search, handleDelete }) => {
 
 const Caption = () => {
   return (
-    <caption className="caption-bottom font-normal mt-2 text-gray-500 bg-transparent">
+    <caption className="italic caption-bottom font-normal mt-2 text-gray-500 bg-transparent dark:bg-gradient-to-r from-indigo-700 to-blue-500 dark:text-white">
       id-ID
     </caption>
   );
@@ -161,4 +124,3 @@ const Caption = () => {
 Table.propTypes;
 TableContainer.propTypes;
 TableBody.propTypes;
-Search.propTypes;

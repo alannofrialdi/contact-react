@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  // search data
+  const [search, setSearch] = useState("");
 
   // fetching data
   const fetchData = async () => {
@@ -33,23 +35,26 @@ export default function Home() {
         <Loader />
       ) : (
         <>
-          <Navbar />
-          <Body data={data} setData={setData} />
+          <Navbar setSearch={setSearch} />
+          <Body>
+            <AddContact />
+            {data.length === 0 ? (
+              <EmptyMessage />
+            ) : (
+              <Table data={data} setData={setData} search={search} />
+            )}
+          </Body>
+          <Footer />
         </>
       )}
     </>
   );
 }
 
-const Body = ({ data, setData }) => {
+const Body = ({ children }) => {
   return (
     <div className="mt-8 flex flex-col justify-center min-h-full min-w-full items-center gap-8">
-      <AddContact />
-      {data.length === 0 ? (
-        <EmptyMessage />
-      ) : (
-        <Table data={data} setData={setData} />
-      )}
+      {children}
     </div>
   );
 };
@@ -94,7 +99,17 @@ const Loader = () => {
   );
 };
 
+const Footer = () => {
+  return (
+    <div className="text-center bold text-black mt-20 dark:text-white">
+      <p>Alan || &#169;2024</p>
+    </div>
+  );
+};
+
 Body.propTypes = {
-  data: PropTypes.array.isRequired,
-  setData: PropTypes.func.isRequired,
+  data: PropTypes.array,
+  setData: PropTypes.func,
+  search: PropTypes.array,
+  children: PropTypes.array,
 };
