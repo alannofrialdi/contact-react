@@ -72,7 +72,7 @@ function Update() {
         const response = await axios.get(
           `http://localhost:3000/users?name=${name}`
         );
-        setData(response.data[0] || {}); // Set data to an empty object if there's no data
+        setData(response.data[0] || {}); // kalo gada data set empty
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -90,7 +90,6 @@ function Update() {
       return;
     }
 
-    // Assuming your data object includes an 'id' property
     const putData = async () => {
       try {
         console.log("Submitting data:", {
@@ -157,7 +156,7 @@ function Form({ data, handleChange, handleUpdate }) {
             }
             id={field}
             name={field}
-            value={data[field] || ""} // Ensure value is not undefined
+            value={data[field] || ""} // value gaboleh kosong
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 text-sm"
             required
