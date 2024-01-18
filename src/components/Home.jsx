@@ -41,16 +41,16 @@ export default function Home() {
   );
 }
 
-function Body({ data }) {
+const Body = ({ data }) => {
   return (
     <div className="mt-8 flex flex-col justify-center min-h-full min-w-full items-center gap-8">
       <AddContact />
       {data.length === 0 ? <EmptyMessage /> : <Table />}
     </div>
   );
-}
+};
 
-function AddContact() {
+const AddContact = () => {
   return (
     <button className="overflow-hidden relative w-32 p-2 h-12 bg-gradient-to-r from-indigo-700 to-blue-500 text-white border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group">
       <Link to="/create">Add</Link>
@@ -62,17 +62,17 @@ function AddContact() {
       </span>
     </button>
   );
-}
+};
 
-function EmptyMessage() {
+const EmptyMessage = () => {
   return (
     <div className="text-red-500 animate-pulse">
       The contact is empty, please add a contact first
     </div>
   );
-}
+};
 
-function Loader() {
+const Loader = () => {
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:translate-x-0 sm:translate-y-0">
       <div className="flex flex-row gap-2 justify-center items-center">
@@ -88,7 +88,7 @@ function Loader() {
       </div>
     </div>
   );
-}
+};
 
 Body.propTypes = {
   data: PropTypes.array.isRequired,

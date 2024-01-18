@@ -45,20 +45,26 @@ export default function Table() {
         className="max-w-full max-h-full mb-4 overflow-auto bg-transparent shadow-xl"
         id="card"
       >
-        <table className="w-full min-w-max table-auto text-center border-collapse bg-white bg-opacity-70">
+        <TableContainer>
           <TableHead />
           <TableBody data={data} search={search} handleDelete={handleDelete} />
-          <caption className="caption-bottom font-normal mt-2 text-gray-500 bg-transparent">
-            id-ID
-          </caption>
-        </table>
+          <Caption />
+        </TableContainer>
       </Card>
       <Search setSearch={setSearch} />
     </>
   );
 }
 
-function Search({ setSearch }) {
+const TableContainer = ({ children }) => {
+  return (
+    <table className="w-full min-w-max table-auto text-center border-collapse bg-white bg-opacity-70">
+      {children}
+    </table>
+  );
+};
+
+const Search = ({ setSearch }) => {
   return (
     <div className="max-w-md mx-auto mb-2">
       <div className="relative flex items-center w-full h-12 rounded-2xl focus-within:shadow-lg bg-white overflow-hidden">
@@ -88,9 +94,9 @@ function Search({ setSearch }) {
       </div>
     </div>
   );
-}
+};
 
-function TableHead() {
+const TableHead = () => {
   return (
     <thead className="bg-gradient-to-r from-indigo-700 to-blue-500 text-white">
       <tr>
@@ -103,9 +109,9 @@ function TableHead() {
       </tr>
     </thead>
   );
-}
+};
 
-function TableBody({ data, search, handleDelete }) {
+const TableBody = ({ data, search, handleDelete }) => {
   return (
     <tbody>
       {/* mapping through the array of index to display data to the table */}
@@ -150,7 +156,16 @@ function TableBody({ data, search, handleDelete }) {
         ))}
     </tbody>
   );
-}
+};
 
+const Caption = () => {
+  return (
+    <caption className="caption-bottom font-normal mt-2 text-gray-500 bg-transparent">
+      id-ID
+    </caption>
+  );
+};
+
+TableContainer.propTypes;
 TableBody.propTypes;
 Search.propTypes;

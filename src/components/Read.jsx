@@ -25,28 +25,8 @@ function Read() {
   return (
     <>
       <div className="mt-40 w-72 h-80 mx-auto bg-gray-100 rounded-xl shadow-2xl">
-        <div className="flex items-center p-3">
-          <div className="px-1">
-            <span className="w-4 h-4 rounded-full inline-block bg-red-500 cursor-pointer"></span>
-          </div>
-          <div className="px-1">
-            <span className="w-4 h-4 rounded-full inline-block bg-yellow-400 cursor-pointer"></span>
-          </div>
-          <div className="px-1">
-            <span className="w-4 h-4 rounded-full inline-block bg-green-500 cursor-pointer"></span>
-          </div>
-        </div>
-        <div className="pl-4 mt-2">
-          {data ? <UserInfo data={data} /> : <EmptyMessage />}
-          <span className="block sm:inline-block">
-            <Link
-              to={"/"}
-              className="font-light text-blue-700 hover:text-blue-900"
-            >
-              &lArr; back to contact
-            </Link>
-          </span>
-        </div>
+        <Dots />
+        <Description data={data} />
       </div>
     </>
   );
@@ -64,11 +44,43 @@ function UserInfo({ data }) {
   );
 }
 
+function Dots() {
+  return (
+    <>
+      <div className="flex items-center p-3">
+        <div className="px-1">
+          <span className="w-4 h-4 rounded-full inline-block bg-red-500 cursor-pointer"></span>
+        </div>
+        <div className="px-1">
+          <span className="w-4 h-4 rounded-full inline-block bg-yellow-400 cursor-pointer"></span>
+        </div>
+        <div className="px-1">
+          <span className="w-4 h-4 rounded-full inline-block bg-green-500 cursor-pointer"></span>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function Description({ data }) {
+  return (
+    <div className="pl-4 mt-2">
+      {data ? <UserInfo data={data} /> : <EmptyMessage />}
+      <span className="block sm:inline-block">
+        <Link to={"/"} className="font-light text-blue-700 hover:text-blue-900">
+          &lArr; back to contact
+        </Link>
+      </span>
+    </div>
+  );
+}
+
 function EmptyMessage() {
   return (
     <p className="text-gray-600">No data available for the provided name.</p>
   );
 }
 
+Description.propTypes;
 UserInfo.propTypes;
 export default Read;

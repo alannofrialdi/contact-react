@@ -3,7 +3,7 @@ import { BsFillMoonStarsFill } from "react-icons/bs";
 import { IoIosSunny } from "react-icons/io";
 import Heading from "./Heading";
 
-function Navbar() {
+export default function Navbar() {
   const storedTheme = localStorage.getItem("theme");
   const [theme, setTheme] = useState(storedTheme || "light");
 
@@ -23,20 +23,37 @@ function Navbar() {
       }`}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold text-xl">
-          <Heading />
-        </div>
-
-        <button
-          className="bg-white text-blue-500 font-bold py-2 px-4 border rounded-lg"
-          onClick={handleThemeSwitch}
-        >
-          {theme === "dark" ? <Light /> : <Dark />}
-        </button>
+        <Tittle />
+        <Mode>
+          <Button handleThemeSwitch={handleThemeSwitch} theme={theme} />
+        </Mode>
       </div>
     </div>
   );
 }
+
+const Mode = ({ children }) => {
+  return children;
+};
+
+const Tittle = () => {
+  return (
+    <div className="text-white font-bold text-xl">
+      <Heading />
+    </div>
+  );
+};
+
+const Button = ({ handleThemeSwitch, theme }) => {
+  return (
+    <button
+      className="bg-white text-blue-500 font-bold py-2 px-4 border rounded-lg"
+      onClick={handleThemeSwitch}
+    >
+      {theme === "dark" ? <Light /> : <Dark />}
+    </button>
+  );
+};
 
 const Light = () => {
   return (
@@ -55,4 +72,5 @@ const Dark = () => {
     </>
   );
 };
-export default Navbar;
+
+Button.propTypes;
