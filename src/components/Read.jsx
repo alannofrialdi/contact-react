@@ -11,7 +11,7 @@ function Read() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/users?name=${name}`
+          `http://localhost:3000/users?name=${name}`,
         );
         setData(response.data[0]); // first result [0]
       } catch (error) {
@@ -36,10 +36,10 @@ function UserInfo({ data }) {
   return (
     <>
       <h3 className="text-xl font-bold mb-2 text-slate-900">{data.name}</h3>
-      <p className="text-gray-600 mb-2 sm:mb-4">Email: {data.email}</p>
-      <p className="text-gray-600 mb-2 sm:mb-4">Phone: {data.phone}</p>
-      <p className="text-gray-600 mb-2 sm:mb-4">Age: {data.age}</p>
-      <p className="text-gray-600 mb-2 sm:mb-4">ID: {data.id}</p>
+      <p className="text-gray-800 mb-2 sm:mb-4">Email: {data.email}</p>
+      <p className="text-gray-800 mb-2 sm:mb-4">Phone: {data.phone}</p>
+      <p className="text-gray-800 mb-2 sm:mb-4">Age: {data.age}</p>
+      <p className="text-gray-800 mb-2 sm:mb-4">ID: {data.id}</p>
     </>
   );
 }

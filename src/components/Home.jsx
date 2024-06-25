@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import Table from "./Table";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { Select, Option } from "@material-tailwind/react";
 import PropTypes from "prop-types";
 
 export default function Home() {
@@ -42,10 +43,20 @@ export default function Home() {
 }
 
 const Body = ({ data }) => {
+  const [filter, setFilter] = useState("");
+
+  const handleChangeFilter = useCallback(
+    (val) => {
+      setFilter(val);
+    },
+    [setFilter],
+  );
+
   return (
     <div className="mt-8 flex flex-col justify-center min-h-full min-w-full items-center gap-8">
       <AddContact />
-      {data.length === 0 ? <EmptyMessage /> : <Table />}
+      {data.length === 0 ? <EmptyMessage /> : <Table filter={filter} />}
+      <SelectFilter callBack={handleChangeFilter} />
     </div>
   );
 };
@@ -89,6 +100,29 @@ const Loader = () => {
     </div>
   );
 };
+
+function SelectFilter({ callBack }) {
+  const [value, setValue] = useState("asc");
+
+  useEffect(() => {
+    callBack(value);
+  }, [value, callBack]);
+
+  return (
+    <div className="max-w-xl">
+      <Select
+        label="Filtered by"
+        value={value || "asc"}
+        onChange={(val) => setValue(val)}
+        color="blue"
+      >
+        <Option value="asc">Name A-Z</Option>
+        <Option value="desc">Name Z-A</Option>
+        <Option value="age">Age</Option>
+      </Select>
+    </div>
+  );
+}
 
 Body.propTypes = {
   data: PropTypes.array.isRequired,

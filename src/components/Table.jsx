@@ -6,9 +6,9 @@ import "../index.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const TABLE_HEAD = ["Name", "Email", "Phone", "Age", "Action", "Detail"];
+const TABLE_HEAD = ["seq", "Name", "Email", "Phone", "Age", "Action", "Detail"];
 
-export default function Table() {
+export default function Table({ filter }) {
   const [data, setData] = useState([]);
 
   // search data
@@ -22,23 +22,31 @@ export default function Table() {
       .catch((err) => console.log(err));
   }, []);
 
+  console.log(filter);
+
+  if (filter === "age") {
+    data.sort((a, b) => a.age - b.age);
+  } else if (filter === "asc") {
+    data.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (filter === "desc") {
+    data.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete?");
     if (confirmDelete) {
       try {
-        // delete by id
         await axios.delete(`http://localhost:3000/users/${id}`);
 
-        // update state by filtering out the deleted user
         setData((prevData) => prevData.filter((user) => user.id !== id));
 
-        toast.success(`User with ID ${id} has been deleted`);
+        const user = data.find((user) => user.id === id);
+        toast.success(`User with name ${user.name} has been deleted`);
       } catch (err) {
         console.error("Error deleting user:", err);
       }
     }
   };
-
   return (
     <>
       <Card
@@ -66,7 +74,7 @@ const TableContainer = ({ children }) => {
 
 const Search = ({ setSearch }) => {
   return (
-    <div className="max-w-md mx-auto mb-2">
+    <div className="max-w-md mx-auto mb-2 flex gap-4">
       <div className="relative flex items-center w-full h-12 rounded-2xl focus-within:shadow-lg bg-white overflow-hidden">
         <div className="grid place-items-center h-full w-12 text-gray-300">
           <svg
@@ -112,22 +120,35 @@ const TableHead = () => {
 };
 
 const TableBody = ({ data, search, handleDelete }) => {
+  // Filter data based on the search input
+  const filteredData = data.filter(({ name }) => {
+    return search.toLowerCase() === ""
+      ? name
+      : name.toLowerCase().includes(search);
+  });
+
   return (
     <tbody>
-      {/* mapping through the array of index to display data to the table */}
-      {data
-        .filter(({ name }) => {
-          return search.toLowerCase() === ""
-            ? name
-            : name.toLowerCase().includes(search);
-        })
-        .map(({ name, email, phone, age, id }, index) => (
+      {/* If no data matches the search query, show a message */}
+      {filteredData.length === 0 ? (
+        <tr>
+          <td
+            colSpan={TABLE_HEAD.length}
+            className="p-4 text-center text-gray-500"
+          >
+            Tidak ada nama yang dicari
+          </td>
+        </tr>
+      ) : (
+        // Otherwise, map through the filtered data and display the rows
+        filteredData.map(({ name, email, phone, age, id }, index) => (
           <tr
             key={index}
             className={`${
-              index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"
-            } hover:bg-gray-200 transition-all`}
+              index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"
+            } hover:bg-blue-50 transition-all`}
           >
+            <td>{index + 1}</td>
             <td className="p-4 capitalize">{name || "N/A"}</td>
             <td className="p-4 lowercase">{email || "N/A"}</td>
             <td className="p-4">{phone || "N/A"}</td>
@@ -153,7 +174,8 @@ const TableBody = ({ data, search, handleDelete }) => {
               </button>
             </td>
           </tr>
-        ))}
+        ))
+      )}
     </tbody>
   );
 };
